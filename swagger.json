@@ -1,0 +1,1923 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "rbac",
+        "description": "role based access Control"
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "users",
+            "description": "users routes"
+        },
+        {
+            "name": "managers",
+            "description": "manager routes"
+        },
+        {
+            "name": "teamLead",
+            "description": "team lead routes"
+        },
+        {
+            "name": "teamMember",
+            "description": "team member routes"
+        },
+        {
+            "name": "project",
+            "description": "project routes"
+        },
+        {
+            "name": "forgot password",
+            "description": "forgot password routes"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "definitions": {
+        "addUsers": {
+            "type": "object",
+            "required": [
+                "fname",
+                "lname",
+                "email",
+                "password",
+                "department",
+                "role"
+            ],
+            "properties": {
+                "fname": {
+                    "type": "string",
+                    "description": " To add user, you must provide first name.",
+                    "example": "Write your first name"
+                },
+                "lname": {
+                    "type": "string",
+                    "description": " To add user, you must provide last name.",
+                    "example": "Write your last name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email id to login",
+                    "example": "example@gmail.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Enter a valid password",
+                    "example": "example@123"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Role of user",
+                    "example": "manager"
+                },
+                "department": {
+                    "type": "string",
+                    "description": "department of the user",
+                    "example": "department"
+                }
+            }
+        },
+        "loginUser": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email id to login",
+                    "example": "example@gmail.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Enter a valid password",
+                    "example": "example@123"
+                }
+            }
+        },
+        "getUser": {
+            "required": [
+                "fname",
+                "lname",
+                "department",
+                "role"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "fname": {
+                    "type": "string"
+                },
+                "lname": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "integer"
+                },
+                "manager": {
+                    "type": "string"
+                },
+                "teamLead": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateUsers": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "fname": {
+                    "type": "string",
+                    "description": "to update the first name",
+                    "example": "Write your first name"
+                },
+                "lname": {
+                    "type": "string",
+                    "description": "to update the last name of the user",
+                    "example": "Write your last name"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "to update Role of user",
+                    "example": "role"
+                },
+                "department": {
+                    "type": "string",
+                    "description": "to update department of the user",
+                    "example": "department"
+                }
+            }
+        },
+        "changePassword": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string",
+                    "description": "to Change password",
+                    "example": "Write your password"
+                },
+                "newpassword": {
+                    "type": "string",
+                    "description": "to Change password",
+                    "example": "Write your new password"
+                }
+            }
+        },
+        "deleteUsers": {
+            "type": "params",
+            "required": [
+                "ID"
+            ],
+            "properties": {
+                "ID": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "userFireBaseToken": {
+            "type": "object",
+            "required": [
+                "fireBaseToken"
+            ],
+            "properties": {
+                "fireBaseToken": {
+                    "type": [
+                        "string"
+                    ],
+                    "example": [
+                        "string"
+                    ]
+                }
+            }
+        },
+        "uploadProfileImg": {
+            "type": "object",
+            "required": [
+                "_id",
+                "profile"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "profile": {
+                    "type": "string",
+                    "description": "Upload The profie image"
+                }
+            }
+        },
+        "getManager": {
+            "required": [
+                "managerName",
+                "department",
+                "role"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "managerName": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateManager": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "managerName": {
+                    "type": "string",
+                    "description": "to update the manager name",
+                    "example": "Write your manager name"
+                },
+                "department": {
+                    "type": "string",
+                    "description": "to update department of the user",
+                    "example": "department"
+                }
+            }
+        },
+        "deleteManager": {
+            "type": "params",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "assignProject": {
+            "type": "object",
+            "required": [
+                "managerId",
+                "projectId"
+            ],
+            "properties": {
+                "managerId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "projectId": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "getTeamLead": {
+            "required": [
+                "leadName",
+                "manager",
+                "department",
+                "role"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateTeamLead": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "leadName": {
+                    "type": "string",
+                    "description": "to update the team lead name",
+                    "example": "Write team lead name"
+                },
+                "manager": {
+                    "type": "string",
+                    "description": "to update the manager name",
+                    "example": "Write  manager name"
+                },
+                "department": {
+                    "type": "string",
+                    "description": "to update department of the team lead department",
+                    "example": "department"
+                }
+            }
+        },
+        "deleteTeamLead": {
+            "type": "params",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "AssignedProjectsToLead": {
+            "type": "object",
+            "required": [
+                "teamleadId",
+                "projectId"
+            ],
+            "properties": {
+                "teamleadId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "projectId": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "AssignedProjectToteamMember": {
+            "type": "object",
+            "required": [
+                "teamMemberId",
+                "projectId"
+            ],
+            "properties": {
+                "teamMemberId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "projectId": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "getTeamMember": {
+            "required": [
+                "memberName",
+                "leadName",
+                "manager",
+                "department",
+                "role"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "memberName": {
+                    "type": "string"
+                },
+                "leadName": {
+                    "type": "string"
+                },
+                "manager": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateTeamMember": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "memberName": {
+                    "type": "string",
+                    "description": "to update the name of the team member"
+                },
+                "leadName": {
+                    "type": "string",
+                    "description": "to update the team lead name",
+                    "example": "Write team lead name"
+                },
+                "manager": {
+                    "type": "string",
+                    "description": "to update the manager name",
+                    "example": "Write  manager name"
+                },
+                "department": {
+                    "type": "string",
+                    "description": "to update department of the team lead department",
+                    "example": "department"
+                }
+            }
+        },
+        "deleteTeamMember": {
+            "type": "params",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "addProject": {
+            "type": "object",
+            "required": [
+                "projectName",
+                "clientName",
+                "projectDescription",
+                "technologies",
+                "duration"
+            ],
+            "properties": {
+                "projectName": {
+                    "type": "string",
+                    "description": "provide the project name",
+                    "example": "string"
+                },
+                "projectDescription": {
+                    "type": "string",
+                    "description": "desceiption about the project",
+                    "example": "string"
+                },
+                "clientName": {
+                    "type": "string",
+                    "description": "nme of the client whose is givenig the project",
+                    "example": "string"
+                },
+                "duration": {
+                    "type": "string",
+                    "description": "time needed to complete this projects",
+                    "example": "string"
+                },
+                "technologies": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "technologies used to develop the object",
+                    "example": [
+                        "reactjs",
+                        "nodejs"
+                    ]
+                }
+            }
+        },
+        "getProject": {
+            "required": [
+                "projectName",
+                "clientName",
+                "projectDescription",
+                "duration",
+                "technologies"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "projectName": {
+                    "type": "string"
+                },
+                "clientName": {
+                    "type": "string"
+                },
+                "Duration": {
+                    "type": "string"
+                },
+                "technologies": {
+                    "type": [
+                        "string"
+                    ]
+                },
+                "projectDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateProject": {
+            "type": "object",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "provide the project name to update it"
+                },
+                "clientName": {
+                    "type": "string",
+                    "description": "to update the project client name"
+                },
+                "Duration": {
+                    "type": "string",
+                    "description": "To Upadte the project duration"
+                },
+                "technologies": {
+                    "type": [
+                        "string"
+                    ],
+                    "description": "To update the project technology"
+                },
+                "projectDescription": {
+                    "type": "string",
+                    "description": "to update the description of the project",
+                    "example": "Write the description"
+                }
+            }
+        },
+        "deleteProject": {
+            "type": "params",
+            "required": [
+                "_id"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "forgotPassword": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "changeForgotPassword":{
+            "type": "object",
+            "required": [
+                "userId",
+                "newPassword"
+            ],
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "newPassword": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            " scheme": "bearer",
+            "in": "header"
+        }
+    },
+    "paths": {
+        "/users/addUsers": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add User",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/addUsers"
+                        }
+                    }
+                ],
+                "summary": "Add the User",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "login User",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/loginUser"
+                        }
+                    }
+                ],
+                "summary": "login user",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/getUsers": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "pageno",
+                        "in": "query",
+                        "description": "provide the page number to be displayed",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "provide the page size to limit the number of records tobe displayed in that page",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    },
+                    {
+                        "name": "regex",
+                        "in": "query",
+                        "description": "provide the first name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "provide the role name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    },
+                    {
+                        "name": "stype",
+                        "in": "query",
+                        "description": "provide the field name based on which have to sort the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    },
+                    {
+                        "name": "sdir",
+                        "in": "query",
+                        "description": "provide the number based on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getUser"
+                        }
+                    }
+                ],
+                "summary": "get user",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/updateUser": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update the User",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/updateUsers"
+                        }
+                    }
+                ],
+                "summary": "update the User",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/changePassword": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "change the User password",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/changePassword"
+                        }
+                    }
+                ],
+                "summary": "Change the User pasword",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/removeUser/{ID}": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in":"path",
+                        "description": "delete the User",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/deleteUsers"
+                        }
+                    }
+                ],
+                "summary": "delete the User",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/firebaseToken": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update the firebaseToken",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/userFireBaseToken"
+                        }
+                    }
+                ],
+                "summary": "update the firebase token",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/users/uploadProfileImg": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "required": true,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/uploadProfileImg"
+                        }
+                    },
+                    {
+                        "name": "profile",
+                        "in": "formdata",
+                        "description": "Upload The profie image",
+                        "required": true,
+                        "type": "file",
+                        "consumes": "multipart/form-data",
+                        "schema": {
+                            "$ref": "#/definitions/uploadProfileImg"
+                        }
+                    }
+                ],
+                "summary": "Uplod the profile",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/managers/get-managers": {
+            "get": {
+                "tags": [
+                    "managers"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "pageno",
+                        "in": "query",
+                        "description": "provide the page number to be displayed",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "provide the page size to limit the number of records tobe displayed in that page",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "description": "provide the department name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    },
+                    {
+                        "name": "regex",
+                        "in": "query",
+                        "description": "provide the manager name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    },
+                    {
+                        "name": "stype",
+                        "in": "query",
+                        "description": "provide the field name based on which have to sort the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    },
+                    {
+                        "name": "sdir",
+                        "in": "query",
+                        "description": "provide the number based on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getManager"
+                        }
+                    }
+                ],
+                "summary": "get Managers",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/managers/edit-manager": {
+            "put": {
+                "tags": [
+                    "managers"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update the User",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/updateManager"
+                        }
+                    }
+                ],
+                "summary": "update Manager",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/managers/remove-manager/{ID}": {
+            "delete": {
+                "tags": [
+                    "managers"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "delete the Manager",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/deleteManager"
+                        }
+                    }
+                ],
+                "summary": "delete Manager",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/managers/assignProject": {
+            "put": {
+                "tags": [
+                    "managers"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Assign Project to Manager",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/assignProject"
+                        }
+                    }
+                ],
+                "summary": "Assigning project to  manager",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamLead/getList": {
+            "get": {
+                "tags": [
+                    "teamLead"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "pageno",
+                        "in": "query",
+                        "description": "provide the page number to be displayed",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "provide the page size to limit the number of records tobe displayed in that page",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "description": "provide the department name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    },
+                    {
+                        "name": "regex",
+                        "in": "query",
+                        "description": "provide the leadn name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    },
+                    {
+                        "name": "stype",
+                        "in": "query",
+                        "description": "provide the field name based on which have to sort the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    },
+                    {
+                        "name": "sdir",
+                        "in": "query",
+                        "description": "provide the number based on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamLead"
+                        }
+                    }
+                ],
+                "summary": "get list of team leads",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamLead/updateLead": {
+            "put": {
+                "tags": [
+                    "teamLead"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update team Lead data",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/updateTeamLead"
+                        }
+                    }
+                ],
+                "summary": "update team lead",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamLead/removeLead/{ID}": {
+            "delete": {
+                "tags": [
+                    "teamLead"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "delete team lead",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/deleteTeamLead"
+                        }
+                    }
+                ],
+                "summary": "delete team lead",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamLead/assignProjectToLead": {
+            "put": {
+                "tags": [
+                    "teamLead"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Assign Project to TeamLead",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/AssignedProjectsToLead"
+                        }
+                    }
+                ],
+                "summary": "Assigning project to  team lead",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamMember/getMembers": {
+            "get": {
+                "tags": [
+                    "teamMember"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "pageno",
+                        "in": "query",
+                        "description": "provide the page number to be displayed",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "provide the page size to limit the number of records tobe displayed in that page",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "description": "provide the department name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "teamLead",
+                        "in": "query",
+                        "description": "provide the team lead name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "managers",
+                        "in": "query",
+                        "description": "provide the manager name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "regex",
+                        "in": "query",
+                        "description": "provide the  team member name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "stype",
+                        "in": "query",
+                        "description": "provide the field name based on which have to sort the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    },
+                    {
+                        "name": "sdir",
+                        "in": "query",
+                        "description": "provide the number based on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getTeamMember"
+                        }
+                    }
+                ],
+                "summary": "get list of team leads",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamMember/updateMember": {
+            "put": {
+                "tags": [
+                    "teamMember"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update team Lead data",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/updateTeamMember"
+                        }
+                    }
+                ],
+                "summary": "update team lead",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamMember/removeMember/{ID}": {
+            "delete": {
+                "tags": [
+                    "teamMember"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "delete team lead",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/deleteTeamMember"
+                        }
+                    }
+                ],
+                "summary": "delete team lead",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/teamMember/AssignedProjectToteamMember": {
+            "put": {
+                "tags": [
+                    "teamMember"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Assign Project to TeamMember",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/AssignedProjectToteamMember"
+                        }
+                    }
+                ],
+                "summary": "Assigning project to  team Member",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/projects/add-project": {
+            "post": {
+                "tags": [
+                    "project"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add the project",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/addProject"
+                        }
+                    }
+                ],
+                "summary": "Add the project",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/projects/get-projects": {
+            "get": {
+                "tags": [
+                    "project"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "pageno",
+                        "in": "query",
+                        "description": "provide the page number to be displayed",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "provide the page size to limit the number of records tobe displayed in that page",
+                        "required": true,
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "projectName",
+                        "in": "query",
+                        "description": "provide the Project name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "clientName",
+                        "in": "query",
+                        "description": "provide the client Name based on which you have to search the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "projectDescription",
+                        "in": "query",
+                        "description": "provide the project Description based on which have to sort the record",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "technologies",
+                        "in": "query",
+                        "description": "provide the technologies on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    },
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "description": "provide the duration on which order to sort the records, to sort the records in ascending order give 1,descending order -1",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/getProject"
+                        }
+                    }
+                ],
+                "summary": "get project",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/projects/edit-project": {
+            "put": {
+                "tags": [
+                    "project"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update the project",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/updateProject"
+                        }
+                    }
+                ],
+                "summary": "update the project",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/projects/delete-project/{ID}": {
+            "delete": {
+                "tags": [
+                    "project"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "delete the project",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/deleteProject"
+                        }
+                    }
+                ],
+                "summary": "delete the project",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/password/forgotPassword": {
+            "post": {
+                "tags": [
+                    "forgot password"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Forgot the password",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/forgotPassword"
+                        }
+                    }
+                ],
+                "summary": "Forgot the password",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        },
+        "/password/changeForgotPassword": {
+            "put": {
+                "tags": [
+                    "change forgot password"
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "change the Forgot password",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/definitions/changeForgotPassword"
+                        }
+                    }
+                ],
+                "summary": "Change Forgot password",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page Not Found or File Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized user or admin"
+                    }
+                }
+            }
+        }
+    }
+}
