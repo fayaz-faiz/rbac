@@ -1,7 +1,5 @@
 FROM node
 
-FROM mongodb
-
 WORKDIR /rbac
 
 COPY package.json /rbac/
