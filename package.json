@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "debug": "node --nolazy --inspect-brk=4000 index.js"
+    "debug": "node --nolazy --inspect-brk=4000 index.js",
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner.bat"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "randomstring": "^1.2.2",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.5.0",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "sonar-scanner" : "3.1.0"
   }
 }
