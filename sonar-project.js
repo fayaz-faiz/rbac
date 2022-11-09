@@ -10,7 +10,7 @@
 // sonar.sourceEncoding=UTF-8
 // sonar.javascript.1cov.reportPaths=coverage/1cov.info
 
-const sonarqubeScanner = require('sonar-scanner');
+const sonarqubeScanner = require('sonarqube-scanner');
 sonarqubeScanner({
     serverUrl:'http://10.10.10.27:9000',
     options : {
